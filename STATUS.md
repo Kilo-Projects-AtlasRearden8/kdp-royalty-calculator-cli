@@ -11,7 +11,7 @@ Files:
 - kdp_royalty.py   - Core math: printing cost, royalty per sale, min list price,
                      profit summary (marketplace sales + author copies).
 - cli.py           - argparse CLI entry point (short result or --summary).
-- tests/test_royalty.py - 21 unittest tests covering the royalty math
+- tests/test_royalty.py - 26 unittest tests covering the royalty math
   (stdlib only, no dependencies).
 - README.md        - Usage, examples, cost model, license, Asdale Dynamics credit.
 - LICENSE          - MIT, Copyright (c) 2026 Asdale Dynamics, LLC.
@@ -32,11 +32,16 @@ No `pip install` needed.
 
 Verification results
 --------------------
-- `python3 -m unittest discover -s tests`: 21 tests, OK.
+- `python3 -m unittest discover -s tests -v`: 26 tests, all pass.
 - CLI short result, printable summary, printing-cost model, and invalid-input
   error paths all exercised successfully.
 - Example: $12.99 list, 200 pages, white paper, US -> $3.25 printing cost,
   $4.54 royalty per sale, $5.42 minimum break-even list price.
+- Profit summary with 100 copies sold + 20 author copies at $14.99 -> $688.80
+  total profit.
+- Validation: negative copies_sold, author_copies, and author_sale_price
+  are rejected with clear error messages.
+- --author-sale-price now triggers summary mode automatically.
 
 Known gaps
 ----------
@@ -47,6 +52,7 @@ Known gaps
   symbols).
 - Only paperback black & white interiors are modeled (no color, no hardcover).
 - No configuration file; all input via CLI flags.
+- No installable package (run directly with `python cli.py`).
 
 Credits
 -------

@@ -162,7 +162,7 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("--price and --pages are required unless --printing-costs is given")
 
     try:
-        if args.summary or args.copies_sold or args.author_copies:
+        if args.summary or args.copies_sold or args.author_copies or args.author_sale_price is not None:
             summary = profit_summary(
                 list_price=args.price,
                 pages=args.pages,

@@ -1,8 +1,9 @@
 # KDP Royalty Calculator CLI
 
-A small, local-first Python CLI that calculates Kindle Direct Publishing (KDP)
-paperback royalties from list price, page count, paper type, and marketplace,
-and prints a profit summary you can copy into a spreadsheet or notebook.
+A friendly, local-first Python tool that calculates Kindle Direct Publishing (KDP)
+paperback royalties from your book's list price, page count, paper type, and
+marketplace — then prints a clean, copy-pasteable profit summary you can drop
+into a spreadsheet or notebook.
 
 Built by **Asdale Dynamics, LLC** — beginner-friendly AI education, books, and
 practical tools for authors and small businesses. https://dylanasdale.github.io
@@ -10,17 +11,20 @@ practical tools for authors and small businesses. https://dylanasdale.github.io
 No cloud, no accounts, no API keys, no personal data. Pure Python standard
 library — nothing to install beyond Python itself.
 
+---
+
 ## What it does
 
-Given a list price, page count, interior paper type (white or cream), and
-KDP marketplace, it prints:
+Give it your book's details and it tells you:
 
-* printing cost per copy (KDP cost model)
-* royalty per sale (60% of list price minus printing cost; 40% with expanded
-  distribution)
-* minimum break-even list price
-* optional printable profit summary for projected marketplace sales and
-  author copies you resell yourself
+* **Printing cost per copy** — based on KDP's published cost model
+* **Royalty per sale** — 60% of list price minus printing cost (40% with
+  expanded distribution)
+* **Minimum break-even list price** — the price where you earn $0.00 per sale
+* **Optional printable profit summary** — projected income from marketplace
+  sales plus author copies you resell yourself
+
+---
 
 ## Quick start
 
@@ -36,12 +40,14 @@ python cli.py --price 12.99 --pages 200 --paper cream --marketplace uk \
 python cli.py --printing-costs
 ```
 
-### Options
+---
+
+## Options
 
 | Option | Meaning |
 |--------|---------|
 | `--price` | List price (required) |
-| `--pages` | Page count, 24-828 (required) |
+| `--pages` | Page count, 24–828 (required) |
 | `--paper` | `white` or `cream` (default: white) |
 | `--marketplace` | `us`, `uk`, `de`, `fr`, `es`, `it`, `jp`, `ca`, `au`, `br`, `mx`, `in` (default: us) |
 | `--expanded-distribution` | Use the 40% royalty rate instead of 60% |
@@ -50,6 +56,8 @@ python cli.py --printing-costs
 | `--author-sale-price` | Your resale price for author copies (default: list price) |
 | `--summary` | Print the full profit summary |
 | `--printing-costs` | Show the cost model and exit |
+
+---
 
 ## Example output
 
@@ -82,21 +90,23 @@ Break-even:
   Minimum list price: $5.42
 ```
 
+---
+
 ## Royalty and cost model
 
 KDP pays a 60% royalty on the list price minus the printing cost for paperback
 sales (40% for expanded distribution). Printing costs in this tool follow the
-KDP black & white paperback model for standard trim sizes (5" x 8" to
-8.25" x 10.625"), US marketplace:
+KDP black & white paperback model for standard trim sizes (5" × 8" to
+8.25" × 10.625"), US marketplace:
 
-* White paper: 24-108 pages: $2.15 + $0.012 per page; 109-828 pages: $0.85 +
-  $0.012 per page
-* Cream paper: 24-108 pages: $2.15 + $0.012 per page; 109-828 pages: $0.90 +
-  $0.012 per page
+* **White paper:** 24–108 pp: $2.15 + $0.012/page; 109–828 pp: $0.85 + $0.012/page
+* **Cream paper:** 24–108 pp: $2.15 + $0.012/page; 109–828 pp: $0.90 + $0.012/page
 
-KDP's prices change. Treat these figures as planning estimates and confirm
-current pricing on KDP before you publish. Currency symbols shown for other
-marketplaces are display only; costs are modeled in USD.
+> **Note:** KDP's prices change. Treat these figures as planning estimates and
+> confirm current pricing on KDP before you publish. Currency symbols shown for
+> non-US marketplaces are display only; costs are modeled in USD.
+
+---
 
 ## Tests
 
@@ -106,9 +116,13 @@ Run the test suite with the standard library only:
 python -m unittest discover -s tests -v
 ```
 
+---
+
 ## License
 
 MIT License. Copyright (c) 2026 Asdale Dynamics, LLC. See LICENSE.
+
+---
 
 ## About
 

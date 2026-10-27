@@ -156,6 +156,13 @@ def profit_summary(
     expanded_distribution:
         Use the 40% expanded-distribution royalty rate instead of 60%.
     """
+    if not isinstance(copies_sold, int) or copies_sold < 0:
+        raise KdpError("copies_sold must be a non-negative integer.")
+    if not isinstance(author_copies, int) or author_copies < 0:
+        raise KdpError("author_copies must be a non-negative integer.")
+    if author_sale_price is not None and author_sale_price < 0:
+        raise KdpError("author_sale_price cannot be negative.")
+
     sale = royalty_per_sale(
         list_price, pages, paper, marketplace, expanded_distribution
     )

@@ -116,6 +116,33 @@ class TestProfitSummary(unittest.TestCase):
         summary = profit_summary(12.99, 200)
         self.assertEqual(summary["total_profit"], 0.00)
 
+    def test_negative_copies_sold_rejected(self):
+        with self.assertRaises(KdpError):
+            profit_summary(12.99, 200, copies_sold=-1)
+
+    def test_negative_author_copies_rejected(self):
+        with self.assertRaises(KdpError):
+            profit_summary(12.99, 200, author_copies=-1)
+
+    def test_negative_author_sale_price_rejected(self):
+        with self.assertRaises(KdpError):
+            profit_summary(12.99, 200, author_copies=10, author_sale_price=-5.00)
+
+    def test_expanded_distribution_summary(self):
+        summary = profit_summary(
+            12.99, 200, copies_sold=100, author_copies=20, expanded_distribution=True
+        )
+        self.assertEqual(summary["royalty_rate"], 0.40)
+        # 12.99 * 0.40 - 3.25 = 5.196 - 3.25 = 1.946 -> 1.95
+        self.assertEqual(summary["royalty_per_copy"], 1.95)
+        self.assertEqual(summary["royalty_income"], 195.00)
+        self.assertEqual(summary["total_profit"], 195.00 + 194.80)
+
+    def test_custom_author_sale_price(self):
+        summary = profit_summary(12.99, 200, author_copies=10, author_sale_price=15.00)
+        self.assertEqual(summary["author_sale_price"], 15.00)
+        self.assertEqual(summary["author_profit"], round(15.00 * 10 - 3.25 * 10, 2))
+
 
 if __name__ == "__main__":
     unittest.main()
